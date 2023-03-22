@@ -20,7 +20,6 @@ class _TodoScreenState extends State<TodoScreen> {
   void initState() {
     fetchTodo();
     super.initState();
-    fetchTodo();
   }
 
   @override
@@ -74,7 +73,8 @@ class _TodoScreenState extends State<TodoScreen> {
               itemBuilder: (context, index) {
                 final item = items[index] as Map;
                 final id = item['_id'];
-                return Card(elevation: 10,
+                return Card(
+                  elevation: 10,
                   child: ListTile(
                     leading: CircleAvatar(
                       child: Text("${index + 1}"),
@@ -162,8 +162,11 @@ class _TodoScreenState extends State<TodoScreen> {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {
+      print(response.body);
       var json = jsonDecode(response.body) as Map<String, dynamic>;
       final itemsjson = json['items'] as List;
+      print(itemsjson);
+
       setState(() {
         items = itemsjson;
       });

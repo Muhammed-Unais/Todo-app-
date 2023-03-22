@@ -87,10 +87,10 @@ class _AddTodoListState extends State<AddTodoList> {
                     formkey.currentState != null) {
                   if (itemValueCheck) {
                     editData();
-                  }else{
-                  submitData();
-                  titileTextEditingController.clear();
-                  discriptTextEditingController.clear();
+                  } else {
+                    submitData();
+                    titileTextEditingController.clear();
+                    discriptTextEditingController.clear();
                   }
                   // Navigator.pop(context);
                 } else {
@@ -112,6 +112,7 @@ class _AddTodoListState extends State<AddTodoList> {
       ),
     );
   }
+
 //  Edit data function===========================
   Future<void> editData() async {
     final todo = widget.item;
@@ -129,6 +130,7 @@ class _AddTodoListState extends State<AddTodoList> {
     // here we are using api with http packat=ge ===============
     final url = "http://api.nstack.in/v1/todos/$id";
     final uri = Uri.parse(url);
+    print(uri);
     final response = await http.put(
       uri,
       body: jsonEncode(body),
@@ -143,7 +145,6 @@ class _AddTodoListState extends State<AddTodoList> {
     }
   }
 
-
 // Submit data or add data function=====================
   void submitData() async {
     final title = titileTextEditingController.text;
@@ -153,7 +154,7 @@ class _AddTodoListState extends State<AddTodoList> {
       "description": discrption,
       "is_completed": false
     };
-    
+
     // here we are using api with http packat=ge ===============
     const url = "http://api.nstack.in/v1/todos";
     final uri = Uri.parse(url);
@@ -171,7 +172,6 @@ class _AddTodoListState extends State<AddTodoList> {
       log(response.statusCode.toString());
     }
   }
-
 
 // Show snack bar function=====================
   void showSnackbar(String success, Color clr) {
